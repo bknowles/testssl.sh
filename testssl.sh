@@ -6938,7 +6938,7 @@ tls_time() {
 # returns 0 if connect was successful, 1 if not
 #
 sclient_connect_successful() {
-     local server_hello="$(cat -v <"$2")"
+     local server_hello="$(cat -v < "$2")"
      local re='Master-Key: ([^\
 ]*)'
 
