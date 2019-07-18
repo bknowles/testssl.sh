@@ -1262,7 +1262,7 @@ strip_trailing_space() {
 # retrieve cipher from ServerHello (via openssl)
 get_cipher() {
      local cipher=""
-     local server_hello="$(< "$1")"
+     local server_hello="$(cat -v "$1")"
 
      if [[ "$server_hello" =~ Cipher\ *:\ ([A-Z0-9]+-[A-Za-z0-9\-]+|TLS_[A-Za-z0-9_]+) ]]; then
           cipher="${BASH_REMATCH##* }"
@@ -1275,7 +1275,7 @@ get_cipher() {
 # retrieve protocol from ServerHello (via openssl)
 get_protocol() {
      local protocol=""
-     local server_hello="$(< "$1")"
+     local server_hello="$(cat -v "$1")"
 
      if [[ "$server_hello" =~ Protocol\ *:\ (SSLv[23]|TLSv1(\.[0-3])?) ]]; then
           protocol="${BASH_REMATCH##* }"
@@ -6938,7 +6938,7 @@ tls_time() {
 # returns 0 if connect was successful, 1 if not
 #
 sclient_connect_successful() {
-     local server_hello="$(<"$2")"
+     local server_hello="$(cat -v <"$2")"
      local re='Master-Key: ([^\
 ]*)'
 
